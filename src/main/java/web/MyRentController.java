@@ -53,47 +53,20 @@ public class MyRentController implements RentService{
 	@ResponseBody
 	@Override
 	public CarDTO getCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
-		List<Car> cars = CarsManager.getCars();
-		int i=0;
-		while(i<cars.size() && cars.get(i).getNumberPlate().equals(plateNumber)==false){
-			i++;
-		}
-		if(i == cars.size()){
-			throw new Exception("No car with " + plateNumber);
-		}
-		CarDTO dto = new CarDTO();
-		dto.setNumberPlate(cars.get(i).getNumberPlate());
-		return dto;
+		return null;
 	}
 
 	@Override
 	@RequestMapping(value = "/car/{plateNumber}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void rentCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
-		List<Car> cars = CarsManager.getCars();
-		int i=0;
-		while(i<cars.size() && cars.get(i).getNumberPlate().equals(plateNumber)==false){
-			i++;
-		}
-		if(i == cars.size()){
-			throw new Exception("No car with " + plateNumber);
-		}
-		cars.get(i).setRented(true);
+		
 	}
 
 	@Override
 	@RequestMapping(value = "/car/{plateNumber}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void renderCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
-		List<Car> cars = CarsManager.getCars();
-		int i=0;
-		while(i<cars.size() && cars.get(i).getNumberPlate().equals(plateNumber)==false){
-			i++;
-		}
-		if(i == cars.size()){
-			throw new Exception("No car with " + plateNumber);
-		}
-		cars.get(i).setRented(false);
 		
 	}
 
