@@ -15,55 +15,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import services.CarsManager;
-import dto.CarDTO;
-
 @Controller
 @Component
-public class MyRentController implements RentService{
+public class MyRentController{
 
-	@Override
-	@RequestMapping(value = "/entryPoint", method = RequestMethod.GET) 
-	@ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-	public ResourceSupport get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
 	@RequestMapping(value = "/car", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public List<CarDTO> getCars() {
-		List<Car> cars = CarsManager.getCars();
-		List<CarDTO> carDTOs = new ArrayList<CarDTO>();
-		int i=0;
-		while(i<cars.size()){
-			CarDTO dto = new CarDTO();
-			dto.setNumberPlate(cars.get(i).getNumberPlate());
-			carDTOs.add(dto);
-			i++;
-		}
-		return carDTOs; 
+	public List<Car> getCars() {
+		return null; 
 	}
 
 	@RequestMapping(value = "/car/{plateNumber}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	@Override
-	public CarDTO getCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
+	public Car getCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
 		return null;
 	}
 
-	@Override
 	@RequestMapping(value = "/car/{plateNumber}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void rentCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
 		
 	}
 
-	@Override
 	@RequestMapping(value = "/car/{plateNumber}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void renderCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
