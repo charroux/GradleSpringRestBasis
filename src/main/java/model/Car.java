@@ -1,10 +1,12 @@
 package model;
 
+@Entity
 public class Car {
 	
 	String numberPlate;
 	boolean rented;
-
+	
+	@Id
 	public String getNumberPlate() {
 		return numberPlate;
 	}
