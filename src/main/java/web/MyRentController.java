@@ -50,7 +50,7 @@ public class MyRentController{
 	@ResponseBody
 	public Car getCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
 		int i=0;
-		while(i<cars.size() && cars.get(i).getNumberPlate().equals(plateNumber)==true){
+		while(i<cars.size() && cars.get(i).getNumberPlate().equals(plateNumber)==false){
 			i++;
 		}
 		if(i < cars.size()){
@@ -63,7 +63,7 @@ public class MyRentController{
 	@ResponseStatus(HttpStatus.OK)
 	public void rentCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
 		int i=0;
-		while(i<cars.size() && cars.get(i).getNumberPlate().equals(plateNumber)==true){
+		while(i<cars.size() && cars.get(i).getNumberPlate().equals(plateNumber)==false){
 			i++;
 		}
 		if(i < cars.size()){
@@ -75,7 +75,7 @@ public class MyRentController{
 	@ResponseStatus(HttpStatus.OK)
 	public void renderCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
 		int i=0;
-		while(i<cars.size() && cars.get(i).getNumberPlate().equals(plateNumber)==true){
+		while(i<cars.size() && cars.get(i).getNumberPlate().equals(plateNumber)==false){
 			i++;
 		}
 		if(i < cars.size()){

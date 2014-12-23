@@ -5,19 +5,11 @@
 src="http://code.jquery.com/jquery-1.11.1.js">
 </script> 
 
-
 	<input id="getAllCarsID" type="submit" value="get all cars" /><br>
 	<div id="afficheListID"></div>
 
-
-	<input type="text" />
+	<input id="plateNumberTextId" type="text" />
 	<input id="getOneCarID" type="submit" value="get 1 car" /><br>
-
-	<input type="text" />
-	<input id="rentCarId" type="submit" value="rent 1 car" /><br>
-
-	<input type="text" />
-	<input id="getBackCarId" type="submit" value="get back 1 car" />
 
 <script type="text/javascript">
 	
@@ -26,14 +18,15 @@ $(document).ready(function() {
 
 	$( "#getAllCarsID" ).click(function() {
 		$.ajax({							
-			url: "http://localhost:8080/GradleSpringRestBasis/car",
+			url: "http://localhost:8080/GradleSpringRestBasis-master/car",
 			dataType: 'json',
 			type: 'GET',
 			success: function(voitures) {
 				
+				$("#afficheListID").empty();
 				$.each( voitures, function( index, voiture) {
 					$.each( voiture, function( data, value) {			
-						$("#afficheListID").html(index + " " + data + " " + value);					});
+						$("#afficheListID").append("Voiture " + index + ": " + data + "=" + value + "  -  ");					});
 				});
 			  
 			},
@@ -44,13 +37,23 @@ $(document).ready(function() {
 	});
 
 	$( "#getOneCarID" ).click(function() {
+		var plate = $("#plateNumberTextId").val();
+		$.ajax({							
+			url: "http://localhost:8080/GradleSpringRestBasis-master/car/"+plate,
+			dataType: 'json',
+			type: 'GET',
+			success: function(voiture) {
+				$("#afficheListID").empty();
+				$.each( voiture, function( data, value) {			
+					$("#afficheListID").append(data + ": " + value + "  -  ");	
+				});
+			},
+			error: function (jqXHR) {
+			  alert(jqXHR.status + ". " + jqXHR.responseText);
+			 }
+		});
 	});
 
-	$( "#rentCarId" ).click(function() {
-	});
-
-	$( "#getBackCarId" ).click(function() {
-	});
 });
 
 </script>	
