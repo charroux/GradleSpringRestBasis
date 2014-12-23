@@ -1,0 +1,50 @@
+
+<html>
+
+<script type="text/javascript" 
+src="http://code.jquery.com/jquery-1.11.1.js">
+</script> 
+
+
+	<input id="getAllCarsID" type="submit" value="get all cars" /><br>
+
+	<input type="text" />
+	<input id="getOneCarID" type="submit" value="get 1 car" /><br>
+
+	<input type="text" />
+	<input id="rentCarId" type="submit" value="rent 1 car" /><br>
+
+	<input type="text" />
+	<input id="getBackCarId" type="submit" value="get back 1 car" />
+
+<script type="text/javascript">
+	
+
+$(document).ready(function() {
+
+	$( "#getAllCarsID" ).click(function() {
+		$.ajax({							
+			url: "http://localhost:8080/GradleSpringRestBasis/car",
+			dataType: 'json',
+			type: 'GET',
+			success: function(data) {
+			  alert(data);
+			},
+			error: function (jqXHR) {
+			  alert(jqXHR.status + ". " + jqXHR.responseText);
+			 }
+		});	
+	});
+
+	$( "#getOneCarID" ).click(function() {
+	});
+
+	$( "#rentCarId" ).click(function() {
+	});
+
+	$( "#getBackCarId" ).click(function() {
+	});
+});
+
+</script>	
+</html>
