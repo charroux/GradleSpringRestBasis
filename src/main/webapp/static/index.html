@@ -7,6 +7,8 @@ src="http://code.jquery.com/jquery-1.11.1.js">
 
 
 	<input id="getAllCarsID" type="submit" value="get all cars" /><br>
+	<div id="afficheListID"></div>
+
 
 	<input type="text" />
 	<input id="getOneCarID" type="submit" value="get 1 car" /><br>
@@ -24,11 +26,16 @@ $(document).ready(function() {
 
 	$( "#getAllCarsID" ).click(function() {
 		$.ajax({							
-			url: "http://localhost:8080/GradleSpringRestBasis-master/car",
+			url: "http://localhost:8080/GradleSpringRestBasis/car",
 			dataType: 'json',
 			type: 'GET',
-			success: function(data) {
-			  alert(data);
+			success: function(voitures) {
+				
+				$.each( voitures, function( index, voiture) {
+					$.each( voiture, function( data, value) {			
+						$("#afficheListID").html(index + " " + data + " " + value);					});
+				});
+			  
 			},
 			error: function (jqXHR) {
 			  alert(jqXHR.status + ". " + jqXHR.responseText);
