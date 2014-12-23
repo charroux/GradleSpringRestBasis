@@ -3,6 +3,10 @@ package web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import model.Car;
 
 import org.springframework.hateoas.ResourceSupport;
@@ -19,23 +23,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Component
 public class MyRentController{
 
-
-	List<Car> cars;
-	
+	EntityManager entityManager;	
 	
 	public MyRentController() {
 		super();
-		cars = new ArrayList<Car>();
-		
-		Car car = new Car();
-		car.setNumberPlate("EEE 55 TT");
-		car.setRented(false);
-		cars.add(car);
-		
-		car = new Car();
-		car.setNumberPlate("AA 11 GG");
-		car.setRented(false);
-		cars.add(car);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("manager1");
+  		entityManager = emf.createEntityManager();
 	}
 
 	@RequestMapping(value = "/car", method = RequestMethod.GET)
