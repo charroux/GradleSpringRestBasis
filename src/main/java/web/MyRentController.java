@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import model.Car;
 
@@ -23,27 +24,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Component
 public class MyRentController{
 
-	//EntityManager entityManager;	
+	EntityManager entityManager;	
 	List<Car> cars = new ArrayList<Car>();
 	
 	public MyRentController() {
 		super();
-		Car car = new Car();
-		car.setNumberPlate("EE 44 EE");
-		car.setRented(false);
-		cars.add(car );
-		car = new Car();
-		car.setNumberPlate("TT 11 DD");
-		car.setRented(false);
-		cars.add(car );
-		//EntityManagerFactory emf = Persistence.createEntityManagerFactory("manager1");
-  		//entityManager = emf.createEntityManager();
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("manager1");
+  		entityManager = emf.createEntityManager();
 	}
 
 	@RequestMapping(value = "/car", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public List<Car> getCars() {
+		List<Car> cars = entityManager.createQuery("select c from Car c").getResultList();
 		return cars; 
 	}
 

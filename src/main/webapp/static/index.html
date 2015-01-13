@@ -14,7 +14,7 @@ $(function(){
 	$("#getCarsID").click(function(){
 		$("#reponseID").empty();
 		$.ajax({							
-		  url: "http://localhost:8080/GradleSpringRestBasis-master/car/",
+		  url: "http://localhost:8080/GradleSpringRestBasis/car/",
 		  dataType: 'json',
 		  type: 'GET',
 		  success: function(voitures) {
