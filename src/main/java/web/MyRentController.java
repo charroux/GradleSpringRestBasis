@@ -23,12 +23,21 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Component
 public class MyRentController{
 
-	EntityManager entityManager;	
+	//EntityManager entityManager;	
+	List<Car> cars = new ArrayList<Car>();
 	
 	public MyRentController() {
 		super();
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("manager1");
-  		entityManager = emf.createEntityManager();
+		Car car = new Car();
+		car.setNumberPlate("EE 44 EE");
+		car.setRented(false);
+		cars.add(car );
+		car = new Car();
+		car.setNumberPlate("TT 11 DD");
+		car.setRented(false);
+		cars.add(car );
+		//EntityManagerFactory emf = Persistence.createEntityManagerFactory("manager1");
+  		//entityManager = emf.createEntityManager();
 	}
 
 	@RequestMapping(value = "/car", method = RequestMethod.GET)
