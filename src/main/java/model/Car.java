@@ -15,7 +15,6 @@ public class Car {
 	}
 
 	public void setNumberPlate(String numberPlate) {
-		
 		this.numberPlate = numberPlate;
 	}
 
