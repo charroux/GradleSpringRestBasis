@@ -19,23 +19,6 @@ import dto.CarDTO;
 @Controller
 @Component
 public class MyRentController implements RentService{
-
-	List<Car> cars = new ArrayList<Car>();
-	
-	public MyRentController(){
-		
-		Car car1 = new Car();
-		car1.setPlateNumber("AA 11 AA");
-		car1.setRented(true);
-		
-		cars.add(car1);
-		
-		Car car2 = new Car();
-		car2.setPlateNumber("BB 22 BB");
-		car2.setRented(false);
-		
-		cars.add(car2);
-	}
 	
 	@Override
 	public ResourceSupport get() {
@@ -48,17 +31,7 @@ public class MyRentController implements RentService{
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public List<CarDTO> getCars() {
-		List<CarDTO> dtos = new ArrayList<CarDTO>();
-		Car car;
-		for(int i=0; i<cars.size(); i++){
-			car = cars.get(i);
-			if(car.isRented() == false){
-				CarDTO dto = new CarDTO();
-				dto.setPlateNumber(car.getPlateNumber());
-				dtos.add(dto);
-			}
-		}
-		return dtos;
+		return null;		
 	}
 
 	@Override
