@@ -39,7 +39,6 @@ public class MyRentController implements RentService{
 	@Override
 	public void renderCar(String plateNumber) throws Exception {
 		// TODO Auto-generated method stub
-		
 	}
 
 	

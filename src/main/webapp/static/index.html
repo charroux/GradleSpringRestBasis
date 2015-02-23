@@ -1,0 +1,54 @@
+<html>
+
+<script src="http://code.jquery.com/jquery-1.11.2.min.js">
+</script>
+
+	<input id="getCarsID" type="submit" value="Get all cars"/><br>
+	Plate number: <input id="plateNumberId" type="text"/><br>
+	<input id="getCarId" type="submit" value="Get one car"/>
+	<div id="reponseID"></div>
+
+<script type="text/javascript">
+
+$(function(){
+	$("#getCarsID").click(function(){
+		$("#reponseID").empty();
+		$.ajax({							
+		  url: "http://localhost:8080/GradleSpringRestBasis-master/car/",
+		  dataType: 'json',
+		  type: 'GET',
+		  success: function(voitures) {
+			$.each(voitures, function(i, voiture){ 
+				$.each(voiture, function(type, value){ 
+					$("#reponseID").append("Voiture " + i + " : " + type + "," + value + "----");
+				});
+			});
+					
+		  },
+		  error: function (jqXHR) {
+			  alert(jqXHR.status + ". " + jqXHR.responseText);
+		  }
+		});		
+	});
+	$("#getCarId").click(function(){
+		var plateNumber = $("#plateNumberId").val();
+		$("#reponseID").empty();
+		$.ajax({							
+		  url: "http://localhost:8080/GradleSpringRestBasis-master/car/"+plateNumber,
+		  dataType: 'json',
+		  type: 'GET',
+		  success: function(voiture) {
+			$.each(voiture, function(type, value){ 
+				$("#reponseID").append("Voiture : " + type + "," + value + "----");
+			});		
+		  },
+		  error: function (jqXHR) {
+			  alert(jqXHR.status + ". " + jqXHR.responseText);
+		  }
+		});
+	});
+});
+		
+</script>
+	
+</html>

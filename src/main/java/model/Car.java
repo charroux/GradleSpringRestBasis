@@ -11,6 +11,7 @@ public class Car {
 
 	public void setPlateNumber(String plateNumber) {
 		this.plateNumber = plateNumber;
+
 	}
 
 	public boolean isRented() {
