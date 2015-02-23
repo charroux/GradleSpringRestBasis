@@ -20,6 +20,22 @@ import dto.CarDTO;
 @Component
 public class MyRentController implements RentService{
 	
+	List<Car> cars = new ArrayList<Car>();
+	
+	public MyRentController(){
+		Car car1 = new Car();
+		car1.setPlateNumber("AA 11 AA");
+		car1.setRented(true);
+		
+		cars.add(car1);
+		
+		Car car2 = new Car();
+		car2.setPlateNumber("BB 22 BB");
+		car2.setRented(false);
+		
+		cars.add(car2);
+	}
+	
 	@Override
 	public ResourceSupport get() {
 		// TODO Auto-generated method stub
@@ -31,7 +47,16 @@ public class MyRentController implements RentService{
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public List<CarDTO> getCars() {
-		return null;		
+		List<CarDTO> dtos = new ArrayList<CarDTO>();
+		Car car;
+		for(int i=0; i<cars.size(); i++){
+			car = cars.get(i);
+			if(car.isRented() == false){
+				CarDTO carDTO = new CarDTO(car);
+				dtos.add(carDTO);
+			}	
+		}
+		return dtos;		
 	}
 
 	@Override
