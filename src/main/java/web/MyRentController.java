@@ -78,7 +78,6 @@ public class MyRentController implements RentService{
 	@ResponseBody
 	@Override
 	public CarDTO getCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
-		System.out.println(plateNumber);
 		int i=0;
 		while(i<cars.size() && cars.get(i).getPlateNumber().equals(plateNumber)==false){
 			i++;
@@ -101,9 +100,21 @@ public class MyRentController implements RentService{
 	@RequestMapping(value = "/car/{plateNumber}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	@Override
-	public void rentCar(String plateNumber) throws Exception {
-		// TODO Auto-generated method stub
+	public void rentCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
+		int i=0;
+		while(i<cars.size() && cars.get(i).getPlateNumber().equals(plateNumber)==false){
+			i++;
+		}
 		
+		if(i<cars.size()){
+			if(cars.get(i).isRented()){
+				throw new Exception("Car already rented");
+			} else {
+				cars.get(i).setRented(true);
+			}
+		}
+		
+		throw new Exception("No car with such a plate number");
 	}
 
 	/**
@@ -115,7 +126,20 @@ public class MyRentController implements RentService{
 	@ResponseStatus(HttpStatus.OK)
 	@Override
 	public void renderCar(String plateNumber) throws Exception {
-		// TODO Auto-generated method stub
+		int i=0;
+		while(i<cars.size() && cars.get(i).getPlateNumber().equals(plateNumber)==false){
+			i++;
+		}
+		
+		if(i<cars.size()){
+			if(cars.get(i).isRented() == false){
+				throw new Exception("Can not get back a no rented car");
+			} else {
+				cars.get(i).setRented(false);
+			}
+		}
+		
+		throw new Exception("No car with such a plate number");
 	}
 
 	
