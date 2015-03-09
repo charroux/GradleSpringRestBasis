@@ -25,13 +25,13 @@ public class MyRentController implements RentService{
 	
 	public MyRentController(){
 		Car car1 = new Car();
-		car1.setPlateNumber("AA 11 AA");
+		car1.setPlateNumber("AA11AA");
 		car1.setRented(true);
 		
 		cars.add(car1);
 		
 		Car car2 = new Car();
-		car2.setPlateNumber("BB 22 BB");
+		car2.setPlateNumber("BB22BB");
 		car2.setRented(false);
 		
 		cars.add(car2);
@@ -112,9 +112,11 @@ public class MyRentController implements RentService{
 			} else {
 				cars.get(i).setRented(true);
 			}
+		} else {
+			throw new Exception("No car with such a plate number");
 		}
 		
-		throw new Exception("No car with such a plate number");
+		
 	}
 
 	/**
@@ -137,9 +139,10 @@ public class MyRentController implements RentService{
 			} else {
 				cars.get(i).setRented(false);
 			}
+		} else {
+			throw new Exception("No car with such a plate number");
 		}
 		
-		throw new Exception("No car with such a plate number");
 	}
 
 	
