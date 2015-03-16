@@ -26,7 +26,7 @@ public class MyRentController implements RentService{
 	public MyRentController(){
 		Car car1 = new Car();
 		car1.setPlateNumber("AA11AA");
-		car1.setRented(true);
+		car1.setRented(false);
 		
 		cars.add(car1);
 		
@@ -127,7 +127,7 @@ public class MyRentController implements RentService{
 	@RequestMapping(value = "/car/{plateNumber}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	@Override
-	public void renderCar(String plateNumber) throws Exception {
+	public void renderCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
 		int i=0;
 		while(i<cars.size() && cars.get(i).getPlateNumber().equals(plateNumber)==false){
 			i++;
