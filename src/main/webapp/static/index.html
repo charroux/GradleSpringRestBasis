@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div id="carsListId">
+	car list:
+	<select id="carsListSelectId"></select>	
+</div>
+<div id="carSpecificationsId"></div>
+<div id="rentId">
+	<input type="button" id="rentButtonId" value="rent"/>
+</div>
+<div id="getBack">
+	Get back a car by its plate number: <input id="plateNumberId" type="text"/>
+	<input type="button" id="getBackButtonId" value="get back"/>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	var carsList = getAllCars();
+	$.each( carsList, function( key, val ) {
+		$("#carsListSelectId").html("<option></option>");		
+	});
+
+});
+
+$("#rentButtonId").click(function(){
+	var plateNumber = "";
+	rent(plateNumber);
+});
+
+$("#getBackButtonId").click(function(){
+	var plateNumber = "";
+	getBack(plateNumber);
+});
+
+
+function getAllCars(){
+	var uri = "http://127.0.0.1:8080/GradleSpringRestBasis-master/car";
+
+	var cars;
+
+	$.ajax({
+	  url: uri,
+	  dataType: 'json',
+	  async: false,		
+	  type: 'GET',
+	  success: function(data) {
+	  	cars = data;
+	  },
+	  error: function (jqXHR) {
+	  	throw new Error(jqXHR.status + ". " + jqXHR.responseText);
+	  }
+	});
+	return cars;
+
+};
+
+function rent(plateNumber){
+	
+	var uri = "http://127.0.0.1:8080/GradleSpringRestBasis-master/car/" + plateNumber;
+
+	$.ajax({// create new author
+	    url: uri,
+	    contentType: "application/json; charset=utf-8",
+	    type: 'DELETE',
+	    async: true,
+	    success: function(data){
+	    	
+	},
+	error: function (jqXHR) {
+		throw new Error(jqXHR.status + ". " + jqXHR.responseText);
+	}
+	}); 
+
+};
+
+function rent(plateNumber){
+	
+	var uri = "http://127.0.0.1:8080/GradleSpringRestBasis-master/car/" + plateNumber;
+
+	$.ajax({// create new author
+	    url: uri,
+	    contentType: "application/json; charset=utf-8",
+	    type: 'PUT',
+	    async: true,
+	    success: function(data){
+	    	
+	},
+	error: function (jqXHR) {
+		throw new Error(jqXHR.status + ". " + jqXHR.responseText);
+	}
+	}); 
+
+};
+</script>
+
+
+</body>
+</html>
