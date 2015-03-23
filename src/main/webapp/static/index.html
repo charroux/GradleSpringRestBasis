@@ -13,6 +13,7 @@
 </div>
 <div id="carSpecificationsId"></div>
 <div id="rentId">
+	<label id="plateNumberLabelId" for=""></label>
 	<input type="button" id="rentButtonId" value="rent"/>
 </div>
 <div id="getBack">
@@ -23,12 +24,19 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	var carsList = getAllCars();
-	$.each( carsList, function( key, val ) {
-		$("#carsListSelectId").html("<option></option>");		
+	var carsList = getAllCars();	//   get /car AJAX
+	var plateNumber = "";
+	$.each( carsList, function( key, val ) {	// loop all cars
+		plateNumber = val["plateNumber"];		// get plate number
+		$("#carsListSelectId").append("<option value=\"" + plateNumber + "\">" + plateNumber + "</option>");		
 	});
-
 });
+
+$('#carsListSelectId').change(function(){
+	var plateNumber = $(this).val();
+	$("#plateNumberLabelId").text(plateNumber);
+});
+
 
 $("#rentButtonId").click(function(){
 	var plateNumber = "";
