@@ -50,7 +50,7 @@ public interface RentService {
 
 	/**
 	*
-	** @return actions to be done
+	** @return get back a car
 	* @throws Exception no car with this plate number or not rented
 	*/
 	@RequestMapping(value = "/car/{plateNumber}", method = RequestMethod.PUT)
