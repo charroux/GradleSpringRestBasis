@@ -2,111 +2,104 @@
 <html>
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
 </head>
 <body>
-<div id="carsListId">
- car list:
- <select id="carsListSelectId"></select>
+
+<div id="carsListID">
+Cars list: 	<select id="selectID">
+			</select>
 </div>
-<div id="carSpecificationsId"></div>
-<div id="rentId">
- <label id="plateNumberLabelId" for=""></label>
- <input type="button" id="rentButtonId" value="rent"/>
+
+<div id="rentID">
+	<label id="labelID"></label>
+	<input id="rentButtonID" type="button" value="Rent"/>
 </div>
+
 <div id="getBack">
- Get back a car by its plate number: <input id="plateNumberId" type="text"/>
- <input type="button" id="getBackButtonId" value="get back"/>
+	Get back: 
+	<input id="plateNumberTextID" type="text"/>
+	<input id="getBackButtonID" type="button" value="Get back"/>
 </div>
 
 <script type="text/javascript">
 
 $(document).ready(function() {
-	var carsList = getAllCars(); // get /car AJAX
-	var plateNumber = "";
-	$.each( carsList, function( key, val ) { // loop all cars
-	plateNumber = val["plateNumber"]; // get plate number
-	$("#carsListSelectId").append("<option value=\"" + plateNumber + "\">" + plateNumber + "</option>");
+	 var carsList = getAllCars();
+	 $.each( carsList, function( key, val ) {
+		 var plateNumber = val["plateNumber"];
+		 $('#selectID').append("<option>" + plateNumber + "</option>");
 	});
 });
 
-$('#carsListSelectId').change(function(){
-	var plateNumber = $(this).val();
-	$("#plateNumberLabelId").text(plateNumber);
+$('#selectID').change(function(){
+    var plateNumber = $(this).val();
+    $('#labelID').text(plateNumber);
 });
 
-
-$("#rentButtonId").click(function(){
-	var plateNumber = $("#plateNumberLabelId").text();
-	rent(plateNumber);
+$("#rentButtonID").click(function(){
+	var plateNumber = $('#labelID').text();
+	rentCar(plateNumber);
 });
 
-$("#getBackButtonId").click(function(){
-	var plateNumber = $("#plateNumberId").val();
-	alert(plateNumber)
-	getBack(plateNumber);
+$("#getBackButtonID").click(function(){
+	var plateNumber = $('#plateNumberTextID').val();
+	getBackCar(plateNumber);
 });
 
 
 function getAllCars(){
-	var uri = "http://127.0.0.1:8080/GradleSpringRestBasis-master/car";
+	var uri = "http://localhost:8080/GradleSpringRestBasis-master/car";
 
-	var cars;
-
-	$.ajax({
-	url: uri,
-	dataType: 'json',
-	async: false,
-	type: 'GET',
-	success: function(data) {
-	cars = data;
-	},
-	error: function (jqXHR) {
-	throw new Error(jqXHR.status + ". " + jqXHR.responseText);
-	}
-	});
-	return cars;
-
-};
-
-function rent(plateNumber){
-	
-	var uri = "http://127.0.0.1:8080/GradleSpringRestBasis-master/car/" + plateNumber;
-
-	$.ajax({// create new author
-	url: uri,
-	contentType: "application/json; charset=utf-8",
-	type: 'DELETE',
-	async: true,
-	success: function(data){
-	alert("ok");
-	},
-	error: function (jqXHR) {
-	throw new Error(jqXHR.status + ". " + jqXHR.responseText);
-	}
-	});
-
-};
-
-function getBack(plateNumber){
-	
-	var uri = "http://127.0.0.1:8080/GradleSpringRestBasis-master/car/" + plateNumber;
+	var carsList;
 
 	$.ajax({
-	url: uri,
-	contentType: "application/json; charset=utf-8",
-	type: 'PUT',
-	async: true,
-	success: function(data){
-	alert("ok")
-	},
-	error: function (jqXHR) {
-	throw new Error(jqXHR.status + ". " + jqXHR.responseText);
-	}
+	  url: uri,
+	  dataType: 'json',
+	  async: false,		
+	  type: 'GET',
+	  success: function(data) {
+		  carsList = data;
+	  },
+	  error: function (jqXHR) {
+	  	throw new Error(jqXHR.status + ". " + jqXHR.responseText);
+	  }
 	});
+	return carsList;
+}
 
-};
+function rentCar(plateNumber){
+	
+	var uri = "http://localhost:8080/GradleSpringRestBasis-master/car/" + plateNumber;
+
+	$.ajax({
+	  url: uri,
+	  dataType: 'json',
+	  async: false,		
+	  type: 'DELETE',
+	  success: function(data) {
+	  },
+	  error: function (jqXHR) {
+	  	throw new Error(jqXHR.status + ". " + jqXHR.responseText);
+	  }
+	});
+}
+
+function getBackCar(plateNumber){
+	
+	var uri = "http://localhost:8080/GradleSpringRestBasis-master/car/" + plateNumber;
+
+	$.ajax({
+	  url: uri,
+	  dataType: 'json',
+	  async: false,		
+	  type: 'PUT',
+	  success: function(data) {
+	  },
+	  error: function (jqXHR) {
+	  	throw new Error(jqXHR.status + ". " + jqXHR.responseText);
+	  }
+	});
+}
 </script>
+
 </body>
