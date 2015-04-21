@@ -51,16 +51,7 @@ public class MyRentController implements RentService{
 	@ResponseBody
 	@Override
 	public List<CarDTO> getCars() {
-		List<CarDTO> dtos = new ArrayList<CarDTO>();
-		Car car;
-		for(int i=0; i<cars.size(); i++){	// parcours BDD
-			car = cars.get(i);				// extrait ième voiture
-			if(car.isRented() == false){	// ? louée
-				CarDTO dto = new CarDTO(car);	// non louée : création DTO
-				dtos.add(dto);				
-			}
-		}
-		return dtos;
+		return null;
 	}
 
 	/**
@@ -74,17 +65,7 @@ public class MyRentController implements RentService{
 	@ResponseBody
 	@Override
 	public CarDTO getCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
-		Car car;
-		int i=0;
-		while(i<cars.size() && cars.get(i).getPlateNumber().equals(plateNumber)==false){
-			i++;
-		}
-		if(i<cars.size()){	// voiture trouvée
-			car = cars.get(i);
-			return new CarDTO(car);
-		} else {			// voiture non trouvée
-			throw new IOException("No car with such a plate number");
-		}
+		return null;
 	}
 
 	/**
@@ -97,17 +78,7 @@ public class MyRentController implements RentService{
 	@ResponseStatus(HttpStatus.OK)
 	@Override
 	public void rentCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
-		Car car;
-		int i=0;
-		while(i<cars.size() && cars.get(i).getPlateNumber().equals(plateNumber)==false){
-			i++;
-		}
-		if(i<cars.size()){	// voiture trouvée
-			car = cars.get(i);
-			car.setRented(true);
-		} else {			// voiture non trouvée
-			throw new IOException("No car with such a plate number");
-		}
+		
 	}
 
 	/**
@@ -119,17 +90,7 @@ public class MyRentController implements RentService{
 	@ResponseStatus(HttpStatus.OK)
 	@Override
 	public void renderCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
-		Car car;
-		int i=0;
-		while(i<cars.size() && cars.get(i).getPlateNumber().equals(plateNumber)==false){
-			i++;
-		}
-		if(i<cars.size()){	// voiture trouvée
-			car = cars.get(i);
-			car.setRented(false);
-		} else {			// voiture non trouvée
-			throw new IOException("No car with such a plate number");
-		}
+		
 	}
 
 }
