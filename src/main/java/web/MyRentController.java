@@ -1,6 +1,9 @@
 package web;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import model.Car;
 
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,20 @@ import dto.CarDTO;
 @Controller
 @Component
 public class MyRentController implements RentService {
+	
+	List<Car> cars = new ArrayList<Car>();
+	
+	public MyRentController(){
+		Car car = new Car();
+		car.setPlateNumber("11AA22");
+		car.setRented(false);
+		cars.add(car);
+		
+		car = new Car();
+		car.setPlateNumber("22BB33");
+		car.setRented(false);
+		cars.add(car);
+	}
 
 	@RequestMapping(value = "/entryPoint", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
